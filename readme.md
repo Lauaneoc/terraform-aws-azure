@@ -1,4 +1,4 @@
-# Terraform + AWS + Azure
+# Terraform + AWS
 
 ## comandos úteis
 
@@ -18,13 +18,16 @@ export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 ```
 
-## Azure Credentials
+## Criar chave pública
 
 ```bash
-export ARM_CLIENT_ID=
-export ARM_TENANT_ID=
-export ARM_SUBSCRIPTION_ID=
-export ARM_CLIENT_SECRET=
+ssh-keygen -t rsa -b 4096 -C "email"
+```
+
+## Acessar aws_instance
+
+```bash
+ssh -i ~/.ssh/id_rsa ubuntu@ID_INSTÂNCIA
 ```
 
 ## Tipos de blocos terraform
@@ -64,7 +67,28 @@ locals {
 }
 ```
 
-## links úteis
+## Conceitos adicionais
 
-[Documentação Terraform](https://www.terraform.io/language)
-[Documentação Providers](https://registry.terraform.io/browse/providers)
+- Local State:
+ Arquivo que o terraform cria automaticamente, onde ele armazena todos os recursos que ele geriu. E através da informação que está nesse arquivo, o terraform se torna idempotente, e isso quer dizer que você pode aplicar a mesma configuração várias vezes, que ele não vai criar os mesmos recursos repetidas vezes, apenas atualizar, se for necessário;
+- Remote State: Podemos armazenar remotamente o arquivo do *state* do **terraform**. Existem várias opções para fazer isso, mas uma das mais utilizadas é armazená-lo em um *bucket s3*;
+
+### diretórios info
+
+- network-aws:
+  - VPC
+  - Subnet
+  - Internet Gateway
+  - Route table
+  - Route table association
+  - Security group
+
+
+## 🔍 links úteis
+
+[Documentação Terraform](https://www.terraform.io/language);
+[Terraform Vars](https://www.terraform.io/language/values/variables);
+[Documentação Providers](https://registry.terraform.io/browse/providers);
+[Provider AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs);
+[Código de todas regioẽs existentes na AWS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html);
+[Lista de regiões Azure](https://docs.microsoft.com/en-us/azure/availability-zones/az-overview);
